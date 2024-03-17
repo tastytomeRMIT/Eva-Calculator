@@ -1,0 +1,86 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  font-family: 'Fira Code', monospace;
+}
+
+body {
+  background-color: #201D30;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator {
+  width: 100%;
+  max-width: 420px;
+  background-color: #201D30;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 12px 12px 4px rgba(0, 0, 0, 0.3);
+}
+
+.evahead img {
+  width: 90px;
+  margin: 20px;
+}
+
+.display {
+  padding: 28px;
+  text-align: right;
+  background-color: #5549B7;
+  color: #ec774e;
+  color: #ec774e;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.display span {
+  font-size: 14px;
+  color: #8EDF5F;
+  opacity: 0.8;
+  text-shadow: none;
+  font-weight: 300;
+  margin-right: 10px;
+}
+
+button {
+  border: none;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 26px;
+  cursor: pointer;
+}
+
+button:hover {
+  transition: 0.4s;
+  opacity: 0.8;
+}
+
+.operations {
+  display: flex
+}
+
+.operations button {
+  flex: 1 1 16.6666%;
+  font-size: 20px;
+  background-color: #8EDF5F;
+}
+
+.numbers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.numbers button {
+  flex: 1 1 33.3333%;
+  max-width: 33.3333%;
+  background-color: #995CD0;
+}
