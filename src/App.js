@@ -1,54 +1,71 @@
-import { useState } from 'react'; // For remembering and displaying values
+import { useState } from 'react'; 
 import evahead from './evahead.png';
-import './App.css'; // Add the missing package name after the import statement
+import './App.css';
 
 function App() {
-  // Calculator 
 
-  // HOOKS
-
-  // Setup hook for remembering the current value via useState
-  // This is basically a variable that will be remembered, and a function to update it 
-  const [input, setInput] = useState(0); 
-  const [total, setTotal] = useState(); // Set total to no value initially 
+  const [input, setInput] = useState(''); 
+  const [total, setTotal] = useState(''); 
+  const [operation, setOperation] = useState(null);
 
   // NUMBER BUTTONS
   const handleNumber = (number) => {
+    if (operation === null) {
+      setTotal(''); // clear total if no operation
+    }
     setInput((input * 10) + number);
   }
 
+  // TODO: Fix
   const handleDecimal = () => {
+    alert("I'M BROKEN")
+    // if (!input.includes('.')) {
+    //   setInput(input + '.');
+    // }
   }
 
-  function handleEquals() {
+  const handleEquals = () => {
+    if (!input || !total || !operation) {
+      return; // do nothing if no input or total or operation
+    }
+
+    if (operation === '+') {
+      setTotal(total + input);
+    } else if (operation === '-') {
+      setTotal(total - input);
+    } else if (operation === '*') {
+      setTotal(total * input);
+    } else if (operation === '/') {
+      setTotal(total / input);
+    }
+    setOperation(null); // clear operation
+    setInput(''); // clear input
   }
 
   // OPERATIONS
 
-  function handleClear() {
-    setInput(0);
-    setTotal(0);
+  const handleClear = () => {
+    setInput('');
+    setTotal('');
+    setOperation(null);
   }
 
-  function handleAdd() {
-  } 
-
-  function handleSubtract() {
+  const handleOperation = (operation) => {
+    if (!input && !total) {
+      return; // do nothing if no input and no total (start of app)
+    }
+    setOperation(operation);
+    setTotal(Number(total) + Number(input)); // Convert total and input to numbers before adding
+    setInput('');
   }
 
-  function handleMultiply() {
-  }
-
-  function handleDivide() {
-  }
-
-  function handleDelete() {
+  // TODO: Fix
+  const handleDelete = () => {
+    alert("I'M BROKEN")
   }
   
-  // JSX  
   return (
 
-    // NOTE: need to wrap the JSX in a single parent element (outermost div)
     <div className='App'>
 
       <div className ='evahead'>
@@ -57,16 +74,17 @@ function App() {
 
       <div className='calculator'>
           <div className='display'>
-            <span>({total})</span>
-            {input}
+            { total ? <span>({total})</span> : <span>(0)</span> }
+            <span>{operation}</span>
+            { input ? input : '0' }
           </div>
 
           <div className='operations'>
             <button className='button' onClick={() => handleClear()}>AC</button>
-            <button className='button' onClick={() => handleAdd()}>+</button>
-            <button className='button' onClick={() => handleSubtract()}>-</button>
-            <button className='button' onClick={() => handleMultiply()}>*</button>
-            <button className='button' onClick={() => handleDivide()}>/</button>
+            <button className='button' onClick={() => handleOperation('+')}>+</button>
+            <button className='button' onClick={() => handleOperation('-')}>-</button>
+            <button className='button' onClick={() => handleOperation('*')}>*</button>
+            <button className='button' onClick={() => handleOperation('/')}>/</button>
             <button className='button' onClick={() => handleDelete()}>DEL</button>
           </div>
 
