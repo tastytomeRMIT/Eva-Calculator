@@ -7,21 +7,25 @@ function App() {
   const [input, setInput] = useState(''); 
   const [total, setTotal] = useState(''); 
   const [operation, setOperation] = useState(null);
+  const [decimal, setDecimal] = useState(false);
 
   // NUMBER BUTTONS
   const handleNumber = (number) => {
     if (operation === null) {
       setTotal(''); // clear total if no operation
     }
-    setInput((input * 10) + number);
+    if (decimal) {
+      setInput(input.toString() + number.toString());
+    } else {
+      setInput((input * 10) + number);
+    }
   }
 
-  // TODO: Fix
   const handleDecimal = () => {
-    alert("I'M BROKEN")
-    // if (!input.includes('.')) {
-    //   setInput(input + '.');
-    // }
+      if (!input.toString().includes('.')) {
+        setInput(input + '.');
+        setDecimal(true);
+      } 
   }
 
   const handleEquals = () => {
@@ -29,17 +33,22 @@ function App() {
       return; // do nothing if no input or total or operation
     }
 
+    const num1 = Number(total);
+    const num2 = Number(input);
+
     if (operation === '+') {
-      setTotal(total + input);
+      setTotal(num1 + num2);
     } else if (operation === '-') {
-      setTotal(total - input);
+      setTotal(num1 - num2);
     } else if (operation === '*') {
-      setTotal(total * input);
+      setTotal(num1 * num2);
     } else if (operation === '/') {
-      setTotal(total / input);
+      setTotal(num1 / num2);
     }
+
     setOperation(null); // clear operation
     setInput(''); // clear input
+    setDecimal(false); // clear decimal
   }
 
   // OPERATIONS
@@ -48,6 +57,7 @@ function App() {
     setInput('');
     setTotal('');
     setOperation(null);
+    setDecimal(false);
   }
 
   const handleOperation = (operation) => {
@@ -59,11 +69,10 @@ function App() {
     setInput('');
   }
 
-  // TODO: Fix
   const handleDelete = () => {
-    alert("I'M BROKEN")
+    setInput(input.toString().slice(0, -1));
   }
-  
+
   return (
 
     <div className='App'>
