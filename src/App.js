@@ -15,15 +15,15 @@ function App() {
       setTotal(''); // clear total if no operation
     }
     if (decimal) {
-      setInput(input.toString() + number.toString());
+      setInput(input => input.toString() + number.toString());
     } else {
-      setInput((input * 10) + number);
+      setInput(input => (input * 10) + number);
     }
   }
 
   const handleDecimal = () => {
       if (!input.toString().includes('.')) {
-        setInput(input + '.');
+        setInput(input => input + '.');
         setDecimal(true);
       } 
   }
@@ -65,12 +65,12 @@ function App() {
       return; // do nothing if no input and no total (start of app)
     }
     setOperation(operation);
-    setTotal(Number(total) + Number(input)); // Convert total and input to numbers before adding
+    setTotal(total => Number(total) + Number(input)); // Convert total and input to numbers before adding
     setInput('');
   }
 
   const handleDelete = () => {
-    setInput(input.toString().slice(0, -1));
+    setInput(input => input.toString().slice(0, -1));
   }
 
   return (
